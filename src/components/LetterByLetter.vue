@@ -11,6 +11,11 @@ export default {
     text: '',
   }),
   created() {
+    if (this.display.length === 0) {
+      EventBus.$emit('command-executed');
+      return;
+    }
+
     for (let i = 0; i < this.display.length; i += 1) {
       const lettre = this.display[i];
       setTimeout(() => {

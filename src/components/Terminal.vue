@@ -1,14 +1,19 @@
 <template>
   <div id="terminal"
+       ref="terminal"
        @click="focusCommandInput">
   
     <input id="command"
            type="text"
            ref="command"
-           v-model="command" />
+           autofocus
+           v-model="command"
+           @keydown.enter="executeCommand" />
   
     <div id="content">
-      <div>
+      <pre>{{content}}</pre>
+      <div id="command-line"
+           v-if="displayCommandLine">
         <Prompt/> {{command}}
         <Caret/>
       </div>
@@ -23,13 +28,23 @@ import Prompt from './Prompt';
 
 export default {
   data: () => ({
-    content: 'content',
-    command: 'command',
-    disabled: false,
+    content: '',
+    command: '',
+    displayCommandLine: true,
   }),
   methods: {
     focusCommandInput() {
       this.$refs.command.focus();
+    },
+    executeCommand() {
+      if (this.command === '') {
+        return;
+      }
+      this.displayCommandLine = false;
+      this.content += this.command;
+      this.content += '\n';
+      this.command = '';
+      this.displayCommandLine = true;
     },
   },
   components: {
@@ -53,5 +68,9 @@ export default {
   opacity: 0;
   height: 0;
   width: 0;
+}
+
+pre {
+  margin: 0;
 }
 </style>

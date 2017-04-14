@@ -46,8 +46,6 @@ export default {
 
 #content {
   padding: 1em;
-  font-weight: bold;
-  font-size: 16px;
 }
 
 #command {

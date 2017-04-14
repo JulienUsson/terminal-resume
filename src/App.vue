@@ -1,5 +1,6 @@
 <template>
-  <terminal></terminal>
+  <terminal>
+  </terminal>
 </template>
 
 <script>
@@ -14,8 +15,11 @@ export default {
 </script>
 
 <style>
- html, body {
-   margin: 0;
-   height: 100%;
- }
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background-color: black;
+  color: white;
+}
 </style>

@@ -1,11 +1,17 @@
 <template>
   <div id="terminal"
        @click="focusCommandInput">
+  
     <input id="command"
            type="text"
            ref="command"
-           v-model="command" /> {{command}}
-    <Caret></Caret>
+           v-model="command" />
+  
+    <div id="content">
+      {{command}}
+      <Caret></Caret>
+    </div>
+  
   </div>
 </template>
 
@@ -29,15 +35,16 @@ export default {
 };
 </script>
 
-<style scoped>
-#terminal {
-  min-height: 100%;
-  width: 100%;
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-}
+<style>
+#terminal { 
+  height: 100%;
+} 
+ 
+#content { 
+  padding: 1em; 
+  font-weight: bold; 
+  font-size: 16px; 
+} 
 
 #command {
   position: absolute;

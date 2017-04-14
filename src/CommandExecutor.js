@@ -1,18 +1,9 @@
-import { EmptyCommand, UnknownCommand } from './commands';
+import CommandResolver from './commands';
 
 class CommandExecutor {
   static execute(commandLine) {
     const command = this.parseCommand(commandLine);
-    let result = '';
-    switch (command.name) {
-      case '':
-        result = EmptyCommand(command.args);
-        break;
-      default:
-        result = UnknownCommand(command.args);
-        break;
-    }
-    return result;
+    return CommandResolver(command.name)(command.args);
   }
 
   static parseCommand(commandLine) {

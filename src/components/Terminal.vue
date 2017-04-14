@@ -10,40 +10,34 @@
            @keydown.enter="executeCommand" />
   
     <div id="content">
-      <pre>{{content}}</pre>
-      <div id="command-line"
-           v-if="displayCommandLine">
-        <Prompt/> {{command}}
-        <Caret/>
-      </div>
+      <Commands :display="commands"></Commands>
+      <CommandInput v-if="showCommandLine">{{command}}</CommandInput>
     </div>
   
   </div>
 </template>
 
 <script>
-import Caret from './Caret';
-import Prompt from './Prompt';
+import Commands from './Commands';
+import CommandInput from './CommandInput';
+import CommandModel from '../models/Command';
 
 export default {
   data: () => ({
-    content: '',
+    commands: [],
     command: '',
-    displayCommandLine: true,
+    showCommandLine: true,
   }),
   methods: {
     focusCommandInput() {
       this.$refs.command.focus();
     },
     executeCommand() {
-      if (this.command === '') {
-        return;
-      }
-      this.displayCommandLine = false;
-      this.content += this.command;
-      this.content += '\n';
+      this.showCommandLine = false;
+      const command = new CommandModel(this.command);
+      this.commands.push(command);
       this.command = '';
-      this.displayCommandLine = true;
+      this.showCommandLine = true;
       this.$nextTick(() => {
         this.scrollDown();
       });
@@ -53,8 +47,8 @@ export default {
     },
   },
   components: {
-    Prompt,
-    Caret,
+    Commands,
+    CommandInput,
   },
 };
 </script>
@@ -73,9 +67,5 @@ export default {
   opacity: 0;
   height: 0;
   width: 0;
-}
-
-pre {
-  margin: 0;
 }
 </style>

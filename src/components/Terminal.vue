@@ -1,6 +1,5 @@
 <template>
   <div id="terminal"
-       ref="terminal"
        @click="focusCommandInput">
   
     <input id="command"
@@ -45,6 +44,12 @@ export default {
       this.content += '\n';
       this.command = '';
       this.displayCommandLine = true;
+      this.$nextTick(() => {
+        this.scrollDown();
+      });
+    },
+    scrollDown() {
+      window.scrollTo(0, document.documentElement.scrollHeight);
     },
   },
   components: {

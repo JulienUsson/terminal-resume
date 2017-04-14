@@ -8,8 +8,10 @@
            v-model="command" />
   
     <div id="content">
-      {{command}}
-      <Caret></Caret>
+      <div>
+        <Prompt/> {{command}}
+        <Caret/>
+      </div>
     </div>
   
   </div>
@@ -17,6 +19,7 @@
 
 <script>
 import Caret from './Caret';
+import Prompt from './Prompt';
 
 export default {
   data: () => ({
@@ -30,21 +33,22 @@ export default {
     },
   },
   components: {
+    Prompt,
     Caret,
   },
 };
 </script>
 
 <style>
-#terminal { 
+#terminal {
   height: 100%;
-} 
- 
-#content { 
-  padding: 1em; 
-  font-weight: bold; 
-  font-size: 16px; 
-} 
+}
+
+#content {
+  padding: 1em;
+  font-weight: bold;
+  font-size: 16px;
+}
 
 #command {
   position: absolute;

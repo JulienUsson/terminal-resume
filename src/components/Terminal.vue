@@ -21,6 +21,7 @@
 import Commands from './Commands';
 import CommandInput from './CommandInput';
 import CommandModel from '../models/Command';
+import EventBus from '../EventBus';
 
 export default {
   data: () => ({
@@ -37,14 +38,22 @@ export default {
       const command = new CommandModel(this.command);
       this.commands.push(command);
       this.command = '';
-      this.showCommandLine = true;
-      this.$nextTick(() => {
-        this.scrollDown();
-      });
     },
     scrollDown() {
       window.scrollTo(0, document.documentElement.scrollHeight);
     },
+  },
+  created() {
+    EventBus.$on('new-line', () => {
+      this.$nextTick(() => {
+        this.scrollDown();
+      });
+    });
+
+    EventBus.$on('command-executed', () => {
+      this.showCommandLine = true;
+      EventBus.$emit('new-line');
+    });
   },
   components: {
     Commands,

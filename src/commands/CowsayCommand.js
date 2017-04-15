@@ -1,6 +1,5 @@
 function CowsayCommand() {
-  return `
- ________________________
+  return ` ________________________
 < Bienvenue sur mon cv ! >
  ------------------------
         \\   ^__^

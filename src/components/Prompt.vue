@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import Directory from '../Directory';
+import DirectoryService from '../services/DirectoryService';
 
 export default {
   data: () => ({
-    path: Directory.path,
+    path: DirectoryService.path,
   }),
 };
 </script>

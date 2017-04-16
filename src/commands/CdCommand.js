@@ -1,4 +1,4 @@
-import Directory, { ERROR_PERMISSION, ERROR_WRONG_DIRECTORY } from '../Directory';
+import DirectoryService, { ERROR_PERMISSION, ERROR_WRONG_DIRECTORY } from '../services/DirectoryService';
 
 function CdCommand(args) {
   if (args.length === 0) {
@@ -8,7 +8,7 @@ function CdCommand(args) {
     return 'Too many arguments';
   }
   try {
-    Directory.changeDir(args[0]);
+    DirectoryService.changeDir(args[0]);
   } catch (e) {
     if (e === ERROR_PERMISSION) {
       return 'Permission denied.';

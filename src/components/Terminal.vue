@@ -20,6 +20,7 @@
 
 <script>
 import KonamiCode from 'konami-code';
+import DirectoryService from '../services/DirectoryService';
 import Motd from './Motd';
 import Commands from './Commands';
 import CommandInput from './CommandInput';
@@ -38,7 +39,7 @@ export default {
     },
     executeCommand() {
       this.showCommandLine = false;
-      const command = new CommandModel(this.command);
+      const command = new CommandModel(this.command, DirectoryService.path);
       this.commands.push(command);
       this.command = '';
     },
@@ -66,7 +67,7 @@ export default {
     const konami = new KonamiCode();
     konami.listen(() => {
       this.showCommandLine = false;
-      const command = new CommandModel('echo There is no konami code.', false);
+      const command = new CommandModel('echo There is no konami code.', null, false);
       this.commands.push(command);
     });
   },

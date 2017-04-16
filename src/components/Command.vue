@@ -1,7 +1,7 @@
 <template>
   <div class="command">
     <div v-if="display.showCommand">
-      <Prompt/><pre class="command">{{display.command}}</pre>
+      <Prompt :path="display.path" /><pre class="command">{{display.command}}</pre>
     </div>
     <LetterByLetter :display="display.result"></LetterByLetter>
   </div>

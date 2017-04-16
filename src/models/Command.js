@@ -1,9 +1,10 @@
 import CommandExecutor from '../CommandExecutor';
 
 class Command {
-  constructor(command) {
+  constructor(command, showCommand = true) {
     this.command = command;
     this.result = CommandExecutor.execute(this.command);
+    this.showCommand = showCommand;
   }
 }
 

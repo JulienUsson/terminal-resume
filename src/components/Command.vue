@@ -1,6 +1,8 @@
 <template>
   <div class="command">
-    <Prompt/>{{display.command}}
+    <div v-if="display.showCommand">
+      <Prompt/>{{display.command}}
+    </div>
     <LetterByLetter :display="display.result"></LetterByLetter>
   </div>
 </template>
@@ -23,4 +25,5 @@ export default {
 </script>
 
 <style>
+
 </style>

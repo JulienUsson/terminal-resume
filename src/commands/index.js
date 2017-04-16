@@ -11,6 +11,7 @@ import HelpCommand from './HelpCommand';
 import LifeCommand from './LifeCommand';
 import LsCommand from './LsCommand';
 import CdCommand from './CdCommand';
+import PwdCommand from './PwdCommand';
 
 const CommandMap = {
   '': EmptyCommand,
@@ -25,6 +26,7 @@ const CommandMap = {
   life: LifeCommand,
   ls: LsCommand,
   cd: CdCommand,
+  pwd: PwdCommand,
 };
 
 function CommandResolver(command) {

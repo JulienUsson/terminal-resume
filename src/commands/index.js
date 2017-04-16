@@ -9,6 +9,8 @@ import RickrolledCommand from './RickrolledCommand';
 import MotdCommand from './MotdCommand';
 import HelpCommand from './HelpCommand';
 import LifeCommand from './LifeCommand';
+import LsCommand from './LsCommand';
+import CdCommand from './CdCommand';
 
 const CommandMap = {
   '': EmptyCommand,
@@ -21,6 +23,8 @@ const CommandMap = {
   motd: MotdCommand,
   help: HelpCommand,
   life: LifeCommand,
+  ls: LsCommand,
+  cd: CdCommand,
 };
 
 function CommandResolver(command) {

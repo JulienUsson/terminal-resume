@@ -28,4 +28,8 @@ body {
 a {
   color: white;
 }
+
+pre {
+  margin: 0;
+}
 </style>

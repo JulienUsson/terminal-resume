@@ -6,6 +6,7 @@ import CowsayCommand from './CowsayCommand';
 import AvatarCommand from './AvatarCommand';
 import ContactmeCommand from './ContactmeCommand';
 import RickrolledCommand from './RickrolledCommand';
+import MotdCommand from './MotdCommand';
 
 const commandMap = {
   '': EmptyCommand,
@@ -16,6 +17,7 @@ const commandMap = {
   contactme: ContactmeCommand,
   rickrolled: RickrolledCommand,
   nevergonna: RickrolledCommand,
+  motd: MotdCommand,
 };
 
 function CommandResolver(command) {

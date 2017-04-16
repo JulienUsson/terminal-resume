@@ -10,6 +10,7 @@
            @keydown.enter="executeCommand" />
   
     <div id="content">
+      <Motd></Motd>
       <Commands :display="commands"></Commands>
       <CommandInput v-if="showCommandLine">{{command}}</CommandInput>
     </div>
@@ -18,6 +19,7 @@
 </template>
 
 <script>
+import Motd from './Motd';
 import Commands from './Commands';
 import CommandInput from './CommandInput';
 import CommandModel from '../models/Command';
@@ -27,7 +29,7 @@ export default {
   data: () => ({
     commands: [],
     command: '',
-    showCommandLine: true,
+    showCommandLine: false,
   }),
   methods: {
     focusCommandInput() {
@@ -61,6 +63,7 @@ export default {
     });
   },
   components: {
+    Motd,
     Commands,
     CommandInput,
   },

@@ -13,9 +13,25 @@ class DirectoryService {
     return directoriesName.join('/');
   }
 
+  listDir(path = null) {
+    let directory = this.directories[this.directories.length - 1];
+    if (path !== null) {
+      const directories = this.searchDir(path);
+      directory = directories[directories.length - 1];
+    }
+
+    let list = directory.repertories.map(repertory => repertory.name).join('\n');
+    list += directory.files.join('\n');
+    return list;
+  }
+
   changeDir(path) {
+    this.directories = this.searchDir(path);
+  }
+
+  searchDir(path) {
     const dirs = path.split('/');
-    const directoriesTmp = this.directories;
+    const directoriesTmp = this.directories.splice(0);
     let currentDir = directoriesTmp[directoriesTmp.length - 1];
 
     for (let i = 0; i < dirs.length; i += 1) {
@@ -38,7 +54,7 @@ class DirectoryService {
       }
     }
 
-    this.directories = directoriesTmp;
+    return directoriesTmp;
   }
 }
 

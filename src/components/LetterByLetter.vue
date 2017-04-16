@@ -26,7 +26,7 @@ export default {
         if (this.text.length === this.display.length) {
           EventBus.$emit('command-executed');
         }
-      }, 10 * i);
+      }, 5 * i);
     }
   },
 };

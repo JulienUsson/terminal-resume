@@ -7,24 +7,26 @@ import AvatarCommand from './AvatarCommand';
 import ContactmeCommand from './ContactmeCommand';
 import RickrolledCommand from './RickrolledCommand';
 import MotdCommand from './MotdCommand';
+import HelpCommand from './HelpCommand';
 
-const commandMap = {
+const CommandMap = {
   '': EmptyCommand,
   echo: EchoCommand,
   whoami: WhoamiCommand,
   cowsay: CowsayCommand,
   avatar: AvatarCommand,
   contactme: ContactmeCommand,
-  rickrolled: RickrolledCommand,
   nevergonna: RickrolledCommand,
   motd: MotdCommand,
+  help: HelpCommand,
 };
 
 function CommandResolver(command) {
-  if (commandMap[command] === undefined) {
+  if (CommandMap[command] === undefined) {
     return UnknownCommand;
   }
-  return commandMap[command];
+  return CommandMap[command];
 }
 
 export default CommandResolver;
+export { CommandMap };

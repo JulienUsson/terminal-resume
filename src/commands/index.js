@@ -8,6 +8,7 @@ import ContactmeCommand from './ContactmeCommand';
 import RickrolledCommand from './RickrolledCommand';
 import MotdCommand from './MotdCommand';
 import HelpCommand from './HelpCommand';
+import LifeCommand from './LifeCommand';
 
 const CommandMap = {
   '': EmptyCommand,
@@ -19,6 +20,7 @@ const CommandMap = {
   nevergonna: RickrolledCommand,
   motd: MotdCommand,
   help: HelpCommand,
+  life: LifeCommand,
 };
 
 function CommandResolver(command) {

@@ -43,6 +43,11 @@ export default {
       window.scrollTo(0, document.documentElement.scrollHeight);
     },
   },
+  watch: {
+    command() {
+      this.scrollDown();
+    },
+  },
   created() {
     EventBus.$on('new-line', () => {
       this.$nextTick(() => {

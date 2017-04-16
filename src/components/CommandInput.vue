@@ -1,7 +1,7 @@
 <template>
   <div id="command-input">
     <Prompt/>
-    <slot></slot>
+    <pre class="command"><slot></slot></pre>
     <Caret/>
   </div>
 </template>
@@ -18,6 +18,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+.command {
+  display: inline;
+}
 </style>

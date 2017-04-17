@@ -16,6 +16,8 @@ function ResumeShCommand() {
   commands.push(LsCommand(['competences']));
   commands.push(EchoCommand(['----- Formation -----']));
   commands.push(LsCommand(['formation']));
+  commands.push(EchoCommand(['----- Hobbies -----']));
+  commands.push(LsCommand(['hobbies']));
   commands.push(ContactmeCommand());
   return commands.join('\n');
 }

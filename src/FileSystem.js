@@ -58,12 +58,25 @@ const formation = {
   ],
 };
 
+const pokequizzLink = '<a href="https://play.google.com/store/apps/details?id=com.ionicframework.pokequizz328623&hl=fr" target="_blank">PokeQuizz</a>';
+
+const hobbies = {
+  name: 'hobbies',
+  repertories: [],
+  files: [
+    `-rw-r--r-- Développement d'une application Android ${pokequizzLink}.`,
+    '-rw-r--r-- Nouvelles technologies (Technologies Web, Raspberry Pi).',
+    '-rw-r--r-- Musique Metal (Musique, concerts, festivals).',
+  ],
+};
+
 const FileSystem = {
   name: '~',
   repertories: [
     experience,
     competences,
     formation,
+    hobbies,
   ],
   files: [
     'hello.jpg',

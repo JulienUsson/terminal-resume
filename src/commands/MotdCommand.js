@@ -16,10 +16,7 @@ Hostname......: Usson
 Date..........: ${now.format('LLLL')}
 Uptime........: ${uptime.years()} ans ${uptime.months()} mois ${uptime.days()} jours
 
-::::::::::::::::::::::::::::::::-STATEMENT-:::::::::::::::::::::::::::::::::
-   This is a private system that you are not to give out access to anyone
-                    without permission from an admin!
-`;
+Type 'help' to list all commands or use 'resume.sh' to print my résumé.`;
 }
 
 export default MotdCommand;

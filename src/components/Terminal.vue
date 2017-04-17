@@ -2,18 +2,18 @@
   <div id="terminal"
        @click="focusCommandInput">
   
-    <div id="content">
-      <Motd></Motd>
-      <Commands :display="commands"></Commands>
-      <CommandInput v-if="showCommandLine">{{command}}</CommandInput>
-    </div>
-
     <input id="command"
            type="text"
            ref="command"
            autofocus
            v-model="command"
            @keydown.enter="executeCommand" />
+  
+    <div id="content">
+      <Motd></Motd>
+      <Commands :display="commands"></Commands>
+      <CommandInput v-if="showCommandLine">{{command}}</CommandInput>
+    </div>
   </div>
 </template>
 
@@ -83,9 +83,10 @@ export default {
 }
 
 #command {
-  position: absolute;
+  position: fixed;
   opacity: 0;
-  height: 0;
-  width: 0;
+  z-index: -100;
+  height: 100%;
+  width: 100%;
 }
 </style>

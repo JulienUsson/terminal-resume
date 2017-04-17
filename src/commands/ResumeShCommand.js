@@ -4,20 +4,20 @@ import ContactmeCommand from './ContactmeCommand';
 import LsCommand from './LsCommand';
 
 function ResumeShCommand() {
-  let resume = '';
-  resume += WhoamiCommand();
-  resume += EchoCommand(['----- experience/freelance -----']);
-  resume += LsCommand(['experience/freelance']);
-  resume += EchoCommand(['----- experience/emploi -----']);
-  resume += LsCommand(['experience/emploi']);
-  resume += EchoCommand(['----- experience/stage -----']);
-  resume += LsCommand(['experience/stage']);
-  resume += EchoCommand(['----- Competences -----']);
-  resume += LsCommand(['competences']);
-  resume += EchoCommand(['----- Formation -----']);
-  resume += LsCommand(['formation']);
-  resume += ContactmeCommand();
-  return resume;
+  const commands = [];
+  commands.push(WhoamiCommand());
+  commands.push(EchoCommand(['----- experience/freelance -----']));
+  commands.push(LsCommand(['experience/freelance']));
+  commands.push(EchoCommand(['----- experience/emploi -----']));
+  commands.push(LsCommand(['experience/emploi']));
+  commands.push(EchoCommand(['----- experience/stage -----']));
+  commands.push(LsCommand(['experience/stage']));
+  commands.push(EchoCommand(['----- Competences -----']));
+  commands.push(LsCommand(['competences']));
+  commands.push(EchoCommand(['----- Formation -----']));
+  commands.push(LsCommand(['formation']));
+  commands.push(ContactmeCommand());
+  return commands.join('\n');
 }
 
 export default ResumeShCommand;

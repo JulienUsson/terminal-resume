@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "konami-code": "^0.2.1",
+    "moment": "^2.18.1",
     "vue": "^2.2.2"
   },
   "devDependencies": {

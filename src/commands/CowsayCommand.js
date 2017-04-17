@@ -6,8 +6,7 @@ function CowsayCommand() {
          \\  (oo)\\_______
             (__)\\       )\\/\\
                 ||----w |
-                ||     ||
-`;
+                ||     ||`;
 }
 
 export default CowsayCommand;

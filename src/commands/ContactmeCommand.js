@@ -7,8 +7,7 @@ function ContactmeCommand() {
   return `Contactez moi par mail : ${MAIL_ACCOUNT}
 Découvrez mon GitHub : ${GITHUB_ACCOUNT}
 Retrouvez moi sur LinkedIn : ${TWITTER_ACCOUNT}
-Suivez moi sur Twitter : ${LINKEDIN_ACCOUNT}
-`;
+Suivez moi sur Twitter : ${LINKEDIN_ACCOUNT}`;
 }
 
 export default ContactmeCommand;

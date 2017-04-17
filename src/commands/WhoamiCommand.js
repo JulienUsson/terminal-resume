@@ -6,8 +6,7 @@ function WhoamiCommand() {
 \\________|____/|____/__|\\_____>___|__/ |______//______>______>____/|___|__/ 
 Développeur Web Full Stack
 #Java #JavaScript #Angular #VueJS #React
-Clermont-Ferrand, France
-`;
+Clermont-Ferrand, France`;
 }
 
 export default WhoamiCommand;

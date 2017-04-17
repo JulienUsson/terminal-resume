@@ -20,8 +20,8 @@ class DirectoryService {
       directory = directories[directories.length - 1];
     }
 
-    let list = directory.repertories.map(repertory => repertory.name).join('\n');
-    list += directory.files.join('\n');
+    let list = directory.repertories.map(repertory => repertory.name);
+    list = list.concat(directory.files);
     return list;
   }
 
@@ -31,7 +31,7 @@ class DirectoryService {
 
   searchDir(path) {
     const dirs = path.split('/');
-    const directoriesTmp = this.directories.splice(0);
+    const directoriesTmp = this.directories.slice(0);
     let currentDir = directoriesTmp[directoriesTmp.length - 1];
 
     for (let i = 0; i < dirs.length; i += 1) {

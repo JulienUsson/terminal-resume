@@ -11,7 +11,8 @@ function LsCommand(args) {
   }
 
   try {
-    return DirectoryService.listDir(path);
+    const list = DirectoryService.listDir(path);
+    return list.join('\n');
   } catch (e) {
     if (e === ERROR_PERMISSION) {
       return 'Permission denied.';

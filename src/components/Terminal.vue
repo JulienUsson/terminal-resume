@@ -6,6 +6,10 @@
            type="text"
            ref="command"
            autofocus
+           autocomplete="off"
+           autocorrect="off"
+           autocapitalize="off"
+           spellcheck="false"
            v-model="command"
            @keydown.enter="executeCommand" />
   

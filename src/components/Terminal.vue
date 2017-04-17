@@ -2,19 +2,18 @@
   <div id="terminal"
        @click="focusCommandInput">
   
+    <div id="content">
+      <Motd></Motd>
+      <Commands :display="commands"></Commands>
+      <CommandInput v-if="showCommandLine">{{command}}</CommandInput>
+    </div>
+
     <input id="command"
            type="text"
            ref="command"
            autofocus
            v-model="command"
            @keydown.enter="executeCommand" />
-  
-    <div id="content">
-      <Motd></Motd>
-      <Commands :display="commands"></Commands>
-      <CommandInput v-if="showCommandLine">{{command}}</CommandInput>
-    </div>
-  
   </div>
 </template>
 
@@ -45,11 +44,6 @@ export default {
     },
     scrollDown() {
       window.scrollTo(0, document.documentElement.scrollHeight);
-    },
-  },
-  watch: {
-    command() {
-      this.scrollDown();
     },
   },
   created() {

@@ -6,8 +6,8 @@ const LINKEDIN_ACCOUNT = '<a href="https://www.linkedin.com/in/julien-usson-64bb
 function ContactmeCommand() {
   return `Contactez moi par mail : ${MAIL_ACCOUNT}
 Découvrez mon GitHub : ${GITHUB_ACCOUNT}
-Retrouvez moi sur LinkedIn : ${TWITTER_ACCOUNT}
-Suivez moi sur Twitter : ${LINKEDIN_ACCOUNT}`;
+Retrouvez moi sur LinkedIn : ${LINKEDIN_ACCOUNT}
+Suivez moi sur Twitter : ${TWITTER_ACCOUNT}`;
 }
 
 export default ContactmeCommand;

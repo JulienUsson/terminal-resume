@@ -14,6 +14,8 @@ export default {
     'showCommandLine',
   ]),
   created() {
+    this.$store.dispatch('getResumeData');
+
     const konami = new KonamiCode();
     konami.listen(() => {
       if (this.showCommandLine) {

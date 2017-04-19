@@ -54,7 +54,7 @@ const actions = {
       setTimeout(() => {
         result += lettre;
         commit(UPDATE_COMMAND_RESULT, { index, result });
-        if (result.length === commandResult.length) {
+        if (result.length === commandResult.length && payload.showCommandLine !== false) {
           commit(SHOW_COMMAND_LINE);
         }
       }, 5 * i);

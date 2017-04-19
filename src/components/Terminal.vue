@@ -68,12 +68,6 @@ export default {
       });
     },
   },
-  created() {
-    this.$store.dispatch('executeCommand', {
-      command: 'motd',
-      showCommand: false,
-    });
-  },
   components: {
     Command,
     CommandInput,

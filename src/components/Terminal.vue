@@ -35,7 +35,20 @@ export default {
       'commands',
       'command',
       'showCommandLine',
+      'lastCommandResult',
     ]),
+  },
+  watch: {
+    lastCommandResult(value) {
+      if (value !== '' && value[value.length - 1] === '\n') {
+        this.scrollDown();
+      }
+    },
+    showCommandLine(value) {
+      if (value === true) {
+        this.scrollDown();
+      }
+    },
   },
   methods: {
     executeCommand() {
@@ -50,7 +63,9 @@ export default {
       this.$refs.command.focus();
     },
     scrollDown() {
-      window.scrollTo(0, document.documentElement.scrollHeight);
+      this.$nextTick(() => {
+        window.scrollTo(0, document.documentElement.scrollHeight);
+      });
     },
   },
   created() {

@@ -21,6 +21,12 @@ const getters = {
   commands: state => state.commands,
   command: state => state.command,
   showCommandLine: state => state.showCommandLine,
+  lastCommandResult: (state) => {
+    if (state.commands.length === 0) {
+      return '';
+    }
+    return state.commands[state.commands.length - 1].result;
+  },
 };
 
 // actions
@@ -48,9 +54,6 @@ const actions = {
       setTimeout(() => {
         result += lettre;
         commit(UPDATE_COMMAND_RESULT, { index, result });
-        if (lettre === '\n') {
-          // EventBus.$emit('new-line');
-        }
         if (result.length === commandResult.length) {
           commit(SHOW_COMMAND_LINE);
         }

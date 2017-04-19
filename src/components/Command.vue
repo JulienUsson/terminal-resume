@@ -1,7 +1,7 @@
 <template>
   <div class="command">
     <div v-if="value.showCommand">
-      <Prompt :path="value.path" /><pre class="command">{{value.command}}</pre>
+      <prompt :path="value.path" /><pre class="command">{{value.command}}</pre>
     </div>
     <pre v-html="value.result"></pre>
   </div>

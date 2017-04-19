@@ -1,8 +1,8 @@
 <template>
   <div id="command-input">
-    <Prompt/>
+    <prompt/>
     <pre class="command"><slot></slot></pre>
-    <Caret/>
+    <caret/>
   </div>
 </template>
 

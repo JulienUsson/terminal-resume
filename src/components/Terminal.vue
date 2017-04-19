@@ -15,11 +15,11 @@
            @keydown.enter="executeCommand" />
   
     <div id="content">
-      <Command v-for="command in commands"
+      <command v-for="command in commands"
                :key="command.$index"
                :value="command">
-      </Command>
-      <CommandInput v-if="showCommandLine">{{command}}</CommandInput>
+      </command>
+      <command-input v-if="showCommandLine">{{command}}</command-input>
     </div>
   </div>
 </template>

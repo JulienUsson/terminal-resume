@@ -8,4 +8,5 @@ export default new Vuex.Store({
   modules: {
     terminal,
   },
+  strict: process.env.NODE_ENV !== 'production',
 });

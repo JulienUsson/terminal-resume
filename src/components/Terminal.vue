@@ -11,7 +11,7 @@
            autocapitalize="off"
            spellcheck="false"
            :value="command"
-           @input="updateCommand"
+           @input="updateCommandLine"
            @keydown.enter="executeCommand" />
   
     <div id="content">
@@ -43,8 +43,8 @@ export default {
         this.$store.dispatch('executeCommand');
       }
     },
-    updateCommand(e) {
-      this.$store.dispatch('updateCommand', e.target.value);
+    updateCommandLine(e) {
+      this.$store.dispatch('updateCommandLine', e.target.value);
     },
     focusCommandInput() {
       this.$refs.command.focus();

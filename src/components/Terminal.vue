@@ -10,68 +10,57 @@
            autocorrect="off"
            autocapitalize="off"
            spellcheck="false"
-           v-model="command"
+           :value="command"
+           @input="updateCommand"
            @keydown.enter="executeCommand" />
   
     <div id="content">
-      <Motd></Motd>
-      <Commands :display="commands"></Commands>
+      <Command v-for="command in commands"
+               :key="command.$index"
+               :value="command">
+      </Command>
       <CommandInput v-if="showCommandLine">{{command}}</CommandInput>
     </div>
   </div>
 </template>
 
 <script>
-import KonamiCode from 'konami-code';
-import DirectoryService from '../services/DirectoryService';
-import Motd from './Motd';
-import Commands from './Commands';
+import { mapGetters } from 'vuex';
+import Command from './Command';
 import CommandInput from './CommandInput';
-import CommandModel from '../models/Command';
-import EventBus from '../EventBus';
 
 export default {
-  data: () => ({
-    commands: [],
-    command: '',
-    showCommandLine: false,
-  }),
+  computed: {
+    ...mapGetters([
+      'commands',
+      'command',
+      'showCommandLine',
+    ]),
+  },
   methods: {
+    executeCommand() {
+      if (this.showCommandLine) {
+        this.$store.dispatch('executeCommand');
+      }
+    },
+    updateCommand(e) {
+      this.$store.dispatch('updateCommand', e.target.value);
+    },
     focusCommandInput() {
       this.$refs.command.focus();
-    },
-    executeCommand() {
-      this.showCommandLine = false;
-      const command = new CommandModel(this.command, DirectoryService.path);
-      this.commands.push(command);
-      this.command = '';
     },
     scrollDown() {
       window.scrollTo(0, document.documentElement.scrollHeight);
     },
   },
   created() {
-    EventBus.$on('new-line', () => {
-      this.$nextTick(() => {
-        this.scrollDown();
-      });
-    });
-
-    EventBus.$on('command-executed', () => {
-      this.showCommandLine = true;
-      EventBus.$emit('new-line');
-    });
-
-    const konami = new KonamiCode();
-    konami.listen(() => {
-      this.showCommandLine = false;
-      const command = new CommandModel('echo There is no konami code.', null, false);
-      this.commands.push(command);
+    this.$store.dispatch('executeCommand', {
+      command: 'motd',
+      showCommand: false,
     });
   },
   components: {
-    Motd,
-    Commands,
+    Command,
     CommandInput,
   },
 };

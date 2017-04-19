@@ -31,12 +31,27 @@ const CommandMap = {
   'resume.sh': ResumeShCommand,
 };
 
-function CommandResolver(command) {
+function parseCommand(commandLine) {
+  const commandInfos = commandLine.trim().split(' ');
+  const name = commandInfos[0];
+  const args = commandInfos.splice(1, commandInfos.length - 1);
+  return {
+    name,
+    args,
+  };
+}
+
+function commandResolver(command) {
   if (CommandMap[command] === undefined) {
     return UnknownCommand;
   }
   return CommandMap[command];
 }
 
-export default CommandResolver;
+function ExecuteCommand(commandLine) {
+  const command = parseCommand(commandLine);
+  return commandResolver(command.name)(command.args);
+}
+
+export default ExecuteCommand;
 export { CommandMap };

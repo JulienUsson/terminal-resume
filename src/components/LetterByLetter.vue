@@ -3,16 +3,21 @@
 </template>
 
 <script>
-import EventBus from '../EventBus';
+import { mapActions } from 'vuex';
 
 export default {
   props: ['display'],
   data: () => ({
     text: '',
   }),
+  methods: {
+    ...mapActions([
+      'commandExecuted',
+    ]),
+  },
   created() {
     if (this.display.length === 0) {
-      EventBus.$emit('command-executed');
+      // EventBus.$emit('command-executed');
       return;
     }
 
@@ -21,10 +26,11 @@ export default {
       setTimeout(() => {
         this.text += lettre;
         if (lettre === '\n') {
-          EventBus.$emit('new-line');
+          // EventBus.$emit('new-line');
         }
         if (this.text.length === this.display.length) {
-          EventBus.$emit('command-executed');
+          // EventBus.$emit('command-executed');
+          this.commandExecuted();
         }
       }, 5 * i);
     }

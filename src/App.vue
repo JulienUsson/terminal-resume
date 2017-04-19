@@ -4,10 +4,20 @@
 </template>
 
 <script>
+import KonamiCode from 'konami-code';
 import Terminal from './components/Terminal';
 
 export default {
   name: 'app',
+  created() {
+    const konami = new KonamiCode();
+    konami.listen(() => {
+      this.$store.dispatch('executeCommand', {
+        command: 'echo There is no konami code.',
+        showCommand: false,
+      });
+    });
+  },
   components: {
     Terminal,
   },

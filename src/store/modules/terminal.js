@@ -35,6 +35,7 @@ const actions = {
     commit(UPDATE_COMMAND_LINE, command);
   },
   executeCommand({ commit, state }, payload) {
+    const showCommandLine = payload === undefined || payload.showCommandLine !== false;
     commit(HIDE_COMMAND_LINE, payload);
     commit(ADD_COMMAND, payload);
     commit(ERASE_COMMAND_LINE, payload);
@@ -54,7 +55,7 @@ const actions = {
       setTimeout(() => {
         result += lettre;
         commit(UPDATE_COMMAND_RESULT, { index, result });
-        if (result.length === commandResult.length && payload.showCommandLine !== false) {
+        if (result.length === commandResult.length && showCommandLine) {
           commit(SHOW_COMMAND_LINE);
         }
       }, 5 * i);

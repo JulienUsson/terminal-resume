@@ -1,13 +1,15 @@
-const MAIL_ACCOUNT = '<a href="mailto:usson.julien@gmail.com" target="_blank">usson.julien@gmail.com</a>';
-const GITHUB_ACCOUNT = '<a href="https://github.com/JulienUsson" target="_blank">https://github.com/JulienUsson</a>';
-const TWITTER_ACCOUNT = '<a href="https://twitter.com/JulienUsson" target="_blank">https://twitter.com/JulienUsson</a>';
-const LINKEDIN_ACCOUNT = '<a href="https://www.linkedin.com/in/julien-usson-64bbbb107" target="_blank">https://www.linkedin.com/in/julien-usson-64bbbb107</a>';
+import store from '../store';
 
 function ContactmeCommand() {
-  return `Contactez moi par mail : ${MAIL_ACCOUNT}
-Découvrez mon GitHub : ${GITHUB_ACCOUNT}
-Retrouvez moi sur LinkedIn : ${LINKEDIN_ACCOUNT}
-Suivez moi sur Twitter : ${TWITTER_ACCOUNT}`;
+  const mail = store.getters.resume.contact.mail;
+  const github = store.getters.resume.contact.github;
+  const linkedin = store.getters.resume.contact.linkedin;
+  const twitter = store.getters.resume.contact.twitter;
+
+  return `Contactez moi par mail : <a href="mailto:${mail}" target="_blank">${mail}</a>
+Découvrez mon GitHub : <a href="${github}" target="_blank">${github}</a>
+Retrouvez moi sur LinkedIn : <a href="${linkedin}" target="_blank">${linkedin}</a>
+Suivez moi sur Twitter : <a href="${twitter}" target="_blank">${twitter}</a>`;
 }
 
 export default ContactmeCommand;

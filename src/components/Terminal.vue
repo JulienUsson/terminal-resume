@@ -55,11 +55,13 @@ export default {
       });
     },
     upArrow() {
+      event.preventDefault();
       if (this.showCommandLine) {
         this.$store.dispatch('commandHistory');
       }
     },
     downArrow() {
+      event.preventDefault();
       if (this.showCommandLine) {
         this.$store.dispatch('commandHistory', -1);
       }

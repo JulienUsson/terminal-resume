@@ -13,6 +13,7 @@ const state = {
 
 // getters
 const getters = {
+  fileSystem: state => state.fileSystem,
   path: (state) => {
     const directoriesName = state.directories.map(directory => directory.name);
     return directoriesName.join('/');

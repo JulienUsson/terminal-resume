@@ -1,12 +1,14 @@
-import FileSystem from '../../FileSystem';
+import ResumeToFileSystem from '../../helpers/ResumeToFileSystem';
 
 export const ERROR_PERMISSION = 'ERROR_PERMISSION';
 export const ERROR_WRONG_DIRECTORY = 'ERROR_WRONG_DIRECTORY';
 export const UPDATE_PATH = 'UPDATE_PATH';
+export const CREATE_FILE_SYSTEM = 'CREATE_FILE_SYSTEM';
 
 // state
 const state = {
-  directories: [FileSystem],
+  fileSystem: {},
+  directories: [],
 };
 
 // getters
@@ -66,6 +68,10 @@ const actions = {
 const mutations = {
   [UPDATE_PATH](state, directories) {
     state.directories = directories;
+  },
+  [CREATE_FILE_SYSTEM](state, resume) {
+    state.fileSystem = ResumeToFileSystem(resume);
+    state.directories = [state.fileSystem];
   },
 };
 

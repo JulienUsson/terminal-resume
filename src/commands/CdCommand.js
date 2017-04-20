@@ -1,5 +1,5 @@
 import store from '../store';
-import { ERROR_PERMISSION, ERROR_WRONG_DIRECTORY } from '../store/modules/path';
+import { ERROR_PERMISSION, ERROR_WRONG_DIRECTORY } from '../store/modules/fileSystem';
 
 function CdCommand(args) {
   if (args.length === 0) {

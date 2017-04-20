@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import terminal from './modules/terminal';
-import path from './modules/path';
+import fileSystem from './modules/fileSystem';
 import resume from './modules/resume';
 
 Vue.use(Vuex);
@@ -9,7 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     terminal,
-    path,
+    fileSystem,
     resume,
   },
   strict: process.env.NODE_ENV !== 'production',

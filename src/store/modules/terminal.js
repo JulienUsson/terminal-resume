@@ -1,6 +1,5 @@
 import Command from '../../models/Command';
 import ExecuteCommand from '../../commands';
-import DirectoryService from '../../services/DirectoryService';
 
 export const ADD_COMMAND = 'ADD_COMMAND';
 export const UPDATE_COMMAND_RESULT = 'UPDATE_COMMAND_RESULT';
@@ -34,15 +33,14 @@ const actions = {
   updateCommandLine({ commit }, command) {
     commit(UPDATE_COMMAND_LINE, command);
   },
-  executeCommand({ commit, state }, payload) {
-    const showCommandLine = payload === undefined || payload.showCommandLine !== false;
-    commit(HIDE_COMMAND_LINE, payload);
-    commit(ADD_COMMAND, payload);
-    commit(ERASE_COMMAND_LINE, payload);
+  executeCommand({ commit, state, getters },
+    { command = null, showCommand = true, showCommandLine = true } = {}) {
+    commit(HIDE_COMMAND_LINE);
+    commit(ADD_COMMAND, new Command(command || state.command, getters.path, showCommand));
+    commit(ERASE_COMMAND_LINE);
 
     const index = state.commands.length - 1;
-    const command = state.commands[index];
-    const commandResult = ExecuteCommand(command.command);
+    const commandResult = ExecuteCommand(state.commands[index].command);
     let result = '';
 
     if (commandResult.length === 0) {
@@ -58,16 +56,15 @@ const actions = {
         if (result.length === commandResult.length && showCommandLine) {
           commit(SHOW_COMMAND_LINE);
         }
-      }, 5 * i);
+      }, 3 * i);
     }
   },
 };
 
 // mutations
 const mutations = {
-  [ADD_COMMAND](state, { command = null, showCommand = true } = {}) {
-    const newCommand = new Command(command || state.command, DirectoryService.path, showCommand);
-    state.commands = [...state.commands, newCommand];
+  [ADD_COMMAND](state, command) {
+    state.commands = [...state.commands, command];
   },
   [UPDATE_COMMAND_RESULT](state, { index, result }) {
     state.commands[index].result = result;

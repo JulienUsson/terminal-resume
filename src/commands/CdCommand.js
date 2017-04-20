@@ -1,4 +1,5 @@
-import DirectoryService, { ERROR_PERMISSION, ERROR_WRONG_DIRECTORY } from '../services/DirectoryService';
+import store from '../store';
+import { ERROR_PERMISSION, ERROR_WRONG_DIRECTORY } from '../store/modules/path';
 
 function CdCommand(args) {
   if (args.length === 0) {
@@ -7,8 +8,10 @@ function CdCommand(args) {
   if (args.length > 1) {
     return 'Too many arguments';
   }
+
   try {
-    DirectoryService.changeDir(args[0]);
+    const directories = store.getters.searchDir(args[0]);
+    store.dispatch('changeDirectory', directories);
   } catch (e) {
     if (e === ERROR_PERMISSION) {
       return 'Permission denied.';

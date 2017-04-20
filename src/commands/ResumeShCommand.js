@@ -6,7 +6,7 @@ import LsCommand from './LsCommand';
 
 function echoFileSystem(commands, repertory, path = '~') {
   if (repertory.repertories.length === 0) {
-    commands.push(EchoCommand([`###### echo \`${path}\` ######`]));
+    commands.push(EchoCommand([`############ echo \`${path}\` ############`]));
     commands.push(LsCommand([path]));
     return;
   }

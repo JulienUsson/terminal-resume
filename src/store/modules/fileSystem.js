@@ -30,13 +30,16 @@ const getters = {
   },
   searchDir: state => (path = null) => {
     const dirs = path.split('/');
-    const directoriesTmp = state.directories.slice(0);
+    let directoriesTmp = state.directories.slice(0);
     let currentDir = directoriesTmp[directoriesTmp.length - 1];
 
     for (let i = 0; i < dirs.length; i += 1) {
       const dir = dirs[i];
 
-      if (dir === '..') {
+      if (dir === '~') {
+        directoriesTmp = [state.fileSystem];
+        currentDir = state.fileSystem;
+      } else if (dir === '..') {
         if (directoriesTmp.length === 1) {
           throw ERROR_PERMISSION;
         }

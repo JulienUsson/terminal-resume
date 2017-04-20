@@ -1,7 +1,7 @@
 <template>
   <div id="terminal" @click="focusCommandInput">
   
-    <input id="command" type="text" ref="command" autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" :value="command" @input="updateCommandLine" @keydown.enter="executeCommand" @keyup.38="upArrow" @keyup.40="downArrow" @keydown.37="leftArrow" />
+    <input id="command" type="text" ref="command" autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" :value="command" @input="updateCommandLine" @keydown.enter="executeCommand" @keydown.38="upArrow" @keydown.40="downArrow" @keydown.37="leftArrow" />
   
     <div id="content">
       <command v-for="command in commands" :key="command.$index" :value="command">

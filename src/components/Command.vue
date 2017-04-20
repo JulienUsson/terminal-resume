@@ -1,25 +1,19 @@
 <template>
   <div class="command">
-    <div v-if="display.showCommand">
-      <Prompt :path="display.path" /><pre class="command">{{display.command}}</pre>
+    <div v-if="value.showCommand">
+      <prompt :path="value.path" /><pre class="command">{{value.command}}</pre>
     </div>
-    <LetterByLetter :display="display.result"></LetterByLetter>
+    <pre v-html="value.result"></pre>
   </div>
 </template>
 
 <script>
 import Prompt from './Prompt';
-import LetterByLetter from './LetterByLetter';
-import EventBus from '../EventBus';
 
 export default {
-  props: ['display'],
+  props: ['value'],
   components: {
     Prompt,
-    LetterByLetter,
-  },
-  created() {
-    EventBus.$emit('new-line');
   },
 };
 </script>

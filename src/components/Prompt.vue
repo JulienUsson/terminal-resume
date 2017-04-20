@@ -1,21 +1,18 @@
 <template>
   <span id="prompt">
-              julien@usson:{{localPath}}$
-            </span>
+                  julien@usson:{{ path || statePath }}$
+                </span>
 </template>
 
 <script>
-import DirectoryService from '../services/DirectoryService';
+import { mapGetters } from 'vuex';
 
 export default {
   props: ['path'],
-  data: () => ({
-    localPath: DirectoryService.path,
-  }),
-  created() {
-    if (this.path) {
-      this.localPath = this.path;
-    }
+  computed: {
+    ...mapGetters({
+      statePath: 'path',
+    }),
   },
 };
 </script>

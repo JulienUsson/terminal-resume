@@ -1,7 +1,7 @@
-import DirectoryService from '../services/DirectoryService';
+import store from '../store';
 
 function PwdCommand() {
-  let path = DirectoryService.path;
+  let path = store.getters.path;
   path = path.replace('~', '/home/julien');
   return path;
 }

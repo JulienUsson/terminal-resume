@@ -1,8 +1,9 @@
+import store from '../store';
+
 function WhoamiCommand() {
-  return `Julien Usson
-Développeur Web Full Stack
-#Java #JavaScript #Angular #VueJS #React
-Clermont-Ferrand, France`;
+  const name = store.getters.resume.profil.name;
+  const description = store.getters.resume.profil.description;
+  return `${name}\n${description}`;
 }
 
 export default WhoamiCommand;

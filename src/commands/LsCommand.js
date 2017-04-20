@@ -1,4 +1,5 @@
-import DirectoryService, { ERROR_PERMISSION, ERROR_WRONG_DIRECTORY } from '../services/DirectoryService';
+import store from '../store';
+import { ERROR_PERMISSION, ERROR_WRONG_DIRECTORY } from '../store/modules/fileSystem';
 
 function LsCommand(args) {
   let path = null;
@@ -11,7 +12,7 @@ function LsCommand(args) {
   }
 
   try {
-    const list = DirectoryService.listDir(path);
+    const list = store.getters.listDir(path);
     return list.join('\n');
   } catch (e) {
     if (e === ERROR_PERMISSION) {

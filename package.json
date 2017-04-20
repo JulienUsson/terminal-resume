@@ -11,9 +11,11 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "konami-code": "^0.2.1",
     "moment": "^2.18.1",
-    "vue": "^2.2.2"
+    "vue": "^2.2.2",
+    "vuex": "^2.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

@@ -1,77 +1,77 @@
 <template>
-  <div id="terminal"
-       @click="focusCommandInput">
+  <div id="terminal" @click="focusCommandInput">
   
-    <input id="command"
-           type="text"
-           ref="command"
-           autofocus
-           autocomplete="off"
-           autocorrect="off"
-           autocapitalize="off"
-           spellcheck="false"
-           v-model="command"
-           @keydown.enter="executeCommand" />
+    <input id="command" type="text" ref="command" autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" :value="command" @input="updateCommandLine" @keydown.enter="executeCommand" @keydown.38="upArrow" @keydown.40="downArrow" @keydown.37="leftArrow" />
   
     <div id="content">
-      <Motd></Motd>
-      <Commands :display="commands"></Commands>
-      <CommandInput v-if="showCommandLine">{{command}}</CommandInput>
+      <command v-for="command in commands" :key="command.$index" :value="command">
+      </command>
+      <command-input v-if="showCommandLine">{{command}}</command-input>
     </div>
   </div>
 </template>
 
 <script>
-import KonamiCode from 'konami-code';
-import DirectoryService from '../services/DirectoryService';
-import Motd from './Motd';
-import Commands from './Commands';
+import { mapGetters } from 'vuex';
+import Command from './Command';
 import CommandInput from './CommandInput';
-import CommandModel from '../models/Command';
-import EventBus from '../EventBus';
 
 export default {
-  data: () => ({
-    commands: [],
-    command: '',
-    showCommandLine: false,
-  }),
+  computed: {
+    ...mapGetters([
+      'commands',
+      'command',
+      'showCommandLine',
+      'lastCommandResult',
+    ]),
+  },
+  watch: {
+    lastCommandResult(value) {
+      if (value !== '' && value[value.length - 1] === '\n') {
+        this.scrollDown();
+      }
+    },
+    showCommandLine(value) {
+      if (value === true) {
+        this.scrollDown();
+      }
+    },
+  },
   methods: {
+    executeCommand() {
+      if (this.showCommandLine) {
+        this.$store.dispatch('executeCommand');
+      }
+    },
+    updateCommandLine(e) {
+      this.$store.dispatch('updateCommandLine', e.target.value);
+    },
     focusCommandInput() {
       this.$refs.command.focus();
     },
-    executeCommand() {
-      this.showCommandLine = false;
-      const command = new CommandModel(this.command, DirectoryService.path);
-      this.commands.push(command);
-      this.command = '';
-    },
     scrollDown() {
-      window.scrollTo(0, document.documentElement.scrollHeight);
-    },
-  },
-  created() {
-    EventBus.$on('new-line', () => {
       this.$nextTick(() => {
-        this.scrollDown();
+        window.scrollTo(0, document.documentElement.scrollHeight);
       });
-    });
-
-    EventBus.$on('command-executed', () => {
-      this.showCommandLine = true;
-      EventBus.$emit('new-line');
-    });
-
-    const konami = new KonamiCode();
-    konami.listen(() => {
-      this.showCommandLine = false;
-      const command = new CommandModel('echo There is no konami code.', null, false);
-      this.commands.push(command);
-    });
+    },
+    upArrow() {
+      event.preventDefault();
+      if (this.showCommandLine) {
+        this.$store.dispatch('commandHistory');
+      }
+    },
+    downArrow() {
+      event.preventDefault();
+      if (this.showCommandLine) {
+        this.$store.dispatch('commandHistory', -1);
+      }
+    },
+    leftArrow(event) {
+      event.preventDefault();
+    },
   },
   components: {
-    Motd,
-    Commands,
+    Command,
     CommandInput,
   },
 };

@@ -4,10 +4,28 @@
 </template>
 
 <script>
+import KonamiCode from 'konami-code';
+import { mapGetters } from 'vuex';
 import Terminal from './components/Terminal';
 
 export default {
   name: 'app',
+  ...mapGetters([
+    'showCommandLine',
+  ]),
+  created() {
+    this.$store.dispatch('getResumeData');
+
+    const konami = new KonamiCode();
+    konami.listen(() => {
+      if (this.showCommandLine) {
+        this.$store.dispatch('executeCommand', {
+          command: 'echo There is no konami code.',
+          showCommand: false,
+        });
+      }
+    });
+  },
   components: {
     Terminal,
   },

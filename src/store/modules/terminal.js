@@ -7,6 +7,7 @@ export const SHOW_COMMAND_LINE = 'SHOW_COMMAND_LINE';
 export const HIDE_COMMAND_LINE = 'HIDE_COMMAND_LINE';
 export const ERASE_COMMAND_LINE = 'ERASE_COMMAND_LINE';
 export const UPDATE_COMMAND_LINE = 'UPDATE_COMMAND_LINE';
+export const CLEAR_COMMANDS = 'CLEAR_COMMANDS';
 
 // state
 const state = {
@@ -30,6 +31,9 @@ const getters = {
 
 // actions
 const actions = {
+  clearCommands({ commit }) {
+    commit(CLEAR_COMMANDS);
+  },
   updateCommandLine({ commit }, command) {
     commit(UPDATE_COMMAND_LINE, command);
   },
@@ -80,6 +84,9 @@ const mutations = {
   },
   [UPDATE_COMMAND_LINE](state, command) {
     state.command = command;
+  },
+  [CLEAR_COMMANDS](state) {
+    state.commands = [];
   },
 };
 

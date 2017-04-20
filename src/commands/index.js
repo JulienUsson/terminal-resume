@@ -14,6 +14,7 @@ import CdCommand from './CdCommand';
 import PwdCommand from './PwdCommand';
 import ResumeShCommand from './ResumeShCommand';
 import AboutCommand from './AboutCommand';
+import ClearCommand from './ClearCommand';
 
 const CommandMap = {
   '': EmptyCommand,
@@ -31,6 +32,7 @@ const CommandMap = {
   pwd: PwdCommand,
   'resume.sh': ResumeShCommand,
   about: AboutCommand,
+  clear: ClearCommand,
 };
 
 function parseCommand(commandLine) {

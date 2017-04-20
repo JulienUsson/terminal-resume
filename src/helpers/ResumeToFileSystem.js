@@ -25,7 +25,11 @@ function skillsToFileSystem(skills) {
   skills.forEach((category) => {
     const categoryNode = new FileSystemNode(category.title.toLowerCase());
     category.items.forEach((item) => {
-      categoryNode.files.push(`-rw-r--r--  ${item.label} [${item.description}]`);
+      let skill = `-rw-r--r--  ${item.title}`;
+      if (item.description) {
+        skill += ` [${item.description}]`;
+      }
+      categoryNode.files.push(skill);
     });
     skillsNode.repertories.push(categoryNode);
   });

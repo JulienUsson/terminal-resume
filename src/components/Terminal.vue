@@ -1,23 +1,10 @@
 <template>
-  <div id="terminal"
-       @click="focusCommandInput">
+  <div id="terminal" @click="focusCommandInput">
   
-    <input id="command"
-           type="text"
-           ref="command"
-           autofocus
-           autocomplete="off"
-           autocorrect="off"
-           autocapitalize="off"
-           spellcheck="false"
-           :value="command"
-           @input="updateCommandLine"
-           @keydown.enter="executeCommand" />
+    <input id="command" type="text" ref="command" autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" :value="command" @input="updateCommandLine" @keydown.enter="executeCommand" @keyup.38="upArrow" @keyup.40="downArrow" @keydown.37="leftArrow" />
   
     <div id="content">
-      <command v-for="command in commands"
-               :key="command.$index"
-               :value="command">
+      <command v-for="command in commands" :key="command.$index" :value="command">
       </command>
       <command-input v-if="showCommandLine">{{command}}</command-input>
     </div>
@@ -66,6 +53,19 @@ export default {
       this.$nextTick(() => {
         window.scrollTo(0, document.documentElement.scrollHeight);
       });
+    },
+    upArrow() {
+      if (this.showCommandLine) {
+        this.$store.dispatch('commandHistory');
+      }
+    },
+    downArrow() {
+      if (this.showCommandLine) {
+        this.$store.dispatch('commandHistory', -1);
+      }
+    },
+    leftArrow(event) {
+      event.preventDefault();
     },
   },
   components: {

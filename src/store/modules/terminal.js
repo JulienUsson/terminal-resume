@@ -8,12 +8,14 @@ export const HIDE_COMMAND_LINE = 'HIDE_COMMAND_LINE';
 export const ERASE_COMMAND_LINE = 'ERASE_COMMAND_LINE';
 export const UPDATE_COMMAND_LINE = 'UPDATE_COMMAND_LINE';
 export const CLEAR_COMMANDS = 'CLEAR_COMMANDS';
+export const UPDATE_HISTORY_INDEX = 'UPDATE_HISTORY_INDEX';
 
 // state
 const state = {
   commands: [],
   command: '',
   showCommandLine: false,
+  historyIndex: 0,
 };
 
 // getters
@@ -33,12 +35,30 @@ const getters = {
 const actions = {
   clearCommands({ commit }) {
     commit(CLEAR_COMMANDS);
+    commit(UPDATE_HISTORY_INDEX, 0);
   },
   updateCommandLine({ commit }, command) {
+    commit(UPDATE_HISTORY_INDEX, 0);
     commit(UPDATE_COMMAND_LINE, command);
+  },
+  commandHistory({ dispatch, commit, state }, order = 1) {
+    const displayedCommands = state.commands.filter(command =>
+      (command.showCommand && command.command),
+    );
+    if (displayedCommands.length > 0) {
+      const newIndex = state.historyIndex + (1 * order);
+      if (newIndex > 0 && newIndex <= displayedCommands.length) {
+        commit(UPDATE_HISTORY_INDEX, newIndex);
+        const historyCommand = displayedCommands[displayedCommands.length - state.historyIndex];
+        commit(UPDATE_COMMAND_LINE, historyCommand.command);
+      } else if (newIndex === 0) {
+        dispatch('updateCommandLine', '');
+      }
+    }
   },
   executeCommand({ commit, state, getters },
     { command = null, showCommand = true, showCommandLine = true } = {}) {
+    commit(UPDATE_HISTORY_INDEX, 0);
     commit(HIDE_COMMAND_LINE);
     commit(ADD_COMMAND, new Command(command || state.command, getters.path, showCommand));
     commit(ERASE_COMMAND_LINE);
@@ -87,6 +107,9 @@ const mutations = {
   },
   [CLEAR_COMMANDS](state) {
     state.commands = [];
+  },
+  [UPDATE_HISTORY_INDEX](state, value) {
+    state.historyIndex = value;
   },
 };
 

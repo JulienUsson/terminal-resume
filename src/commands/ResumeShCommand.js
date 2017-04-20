@@ -6,8 +6,9 @@ import LsCommand from './LsCommand';
 
 function echoFileSystem(commands, repertory, path = '~') {
   if (repertory.repertories.length === 0) {
-    commands.push(EchoCommand([`############ echo \`${path}\` ############`]));
+    commands.push(EchoCommand([`######################## ls ${path} ########################`]));
     commands.push(LsCommand([path]));
+    commands.push(EchoCommand([]));
     return;
   }
 
@@ -19,7 +20,9 @@ function echoFileSystem(commands, repertory, path = '~') {
 function ResumeShCommand() {
   const commands = [];
   commands.push(WhoamiCommand());
+  commands.push(EchoCommand([]));
   echoFileSystem(commands, store.getters.fileSystem);
+  commands.push(EchoCommand([]));
   commands.push(ContactmeCommand());
   return commands.join('\n');
 }

@@ -19,7 +19,6 @@ export default {
 
     const konami = new KonamiCode();
     konami.listen(() => {
-      console.log(this.showCommandLine);
       if (this.showCommandLine) {
         this.$store.dispatch('executeCommand', {
           command: 'echo There is no konami code.',

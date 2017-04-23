@@ -9,15 +9,17 @@ import { mapGetters } from 'vuex';
 import Terminal from './components/Terminal';
 
 export default {
-  name: 'app',
-  ...mapGetters([
-    'showCommandLine',
-  ]),
-  created() {
+  computed: {
+    ...mapGetters([
+      'showCommandLine',
+    ]),
+  },
+  mounted() {
     this.$store.dispatch('getResumeData');
 
     const konami = new KonamiCode();
     konami.listen(() => {
+      console.log(this.showCommandLine);
       if (this.showCommandLine) {
         this.$store.dispatch('executeCommand', {
           command: 'echo There is no konami code.',

@@ -36,6 +36,14 @@ function skillsToFileSystem(skills) {
   return skillsNode;
 }
 
+function projectsToFileSystem(projects) {
+  const projectsNode = new FileSystemNode('projets_personnels');
+  projects.forEach((item) => {
+    projectsNode.files.push(`-rw-r--r-- <a href="${item.link}" target="_blank">${item.title}</a> ${item.description} [${item.skills.join(', ')}]`);
+  });
+  return projectsNode;
+}
+
 function hobbiesToFileSystem(hobbies) {
   const hobbiesNode = new FileSystemNode('hobbies');
   hobbies.forEach((item) => {
@@ -51,6 +59,7 @@ function ResumeToFileSystem(resume) {
       experienceToFileSystem(resume.experiences),
       educationsToFileSystem(resume.educations),
       skillsToFileSystem(resume.skills),
+      projectsToFileSystem(resume.projects),
       hobbiesToFileSystem(resume.hobbies),
     ],
     files: [

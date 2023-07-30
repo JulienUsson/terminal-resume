@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CREATE_FILE_SYSTEM } from './fileSystem';
 
-const RESUME_DATA_URL = 'https://julien.usson.me/json-resume/resume-fr.json';
+const RESUME_DATA_URL = 'https://julien.usson.dev/json-resume/resume-fr.json';
 export const GET_RESUME_DATA = 'GET_RESUME_DATA';
 
 // state
